@@ -1,0 +1,64 @@
+/*
+1 - Ato de agregar dados de duas ou mais tabelas referenciados por chaves;
+
+2 -
+LEFT JOIN -> Traz todos os dados correspondentes a tabela esquerda e sua
+uniao com a tabela direita
+
+RIGHT JOIN -> Traz todos os dados correspondentes a tabela direita e sua
+uniao com a tabela esquerda
+
+3- Agurpa os dados da linhas baseados em sua semelhanca, a partir de um atributo especificado
+
+4 - Condicao de filtragem utilizada a um grupo de registros ou agregacoes
+
+5 - INNER e LEFT
+
+*/
+
+-- 6.1
+SELECT COUNT(title), genres.name AS genre
+FROM movies
+RIGHT JOIN genres ON movies.genre_id = genres.id
+GROUP BY genres.name;
+
+-- 6.2
+SELECT *
+FROM movies
+FULL JOIN genres ON genre_id = genres.id;
+
+
+-- SEGUNDA PARTE
+
+
+-- 1
+SELECT
+    title, name genre
+FROM
+    series
+        LEFT JOIN
+    genres ON (genre_id = genres.id);
+
+-- 2
+SELECT title, CONCAT(first_name, ' ', last_name) AS name FROM actor_episode
+INNER JOIN actors ON (actors.id = actor_id)
+INNER JOIN episodes ON (episodes.id = episode_id);
+
+-- 3
+SELECT series.title, COUNT(serie_id) AS totalSeasons FROM series
+LEFT JOIN seasons ON (series.id = serie_id)
+GROUP BY title;
+
+
+-- 4
+SELECT COUNT(title) AS total_title , genres.name AS genre
+FROM movies
+LEFT JOIN genres ON movies.genre_id = genres.id
+GROUP BY genres.name
+HAVING total_title >= 3;
+
+-- 5
+SELECT DISTINCT first_name, last_name FROM actor_movie
+INNER JOIN actors ON (actors.id = actor_id)
+INNER JOIN movies ON (movies.id = movie_id)
+WHERE movies.title LIKE 'La Guerra de las galaxias:%'
