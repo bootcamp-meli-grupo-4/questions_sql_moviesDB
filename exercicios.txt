@@ -1,5 +1,5 @@
 /*
-1 - Ato de agregar dados de duas ou mais tabelas referenciados por chaves;
+1 - Ato de agregar dados de duas tabelas referenciados por chaves;
 
 2 -
 LEFT JOIN -> Traz todos os dados correspondentes a tabela esquerda e sua
